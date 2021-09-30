@@ -10,3 +10,17 @@ export default function Button(props) {
         </div>
     )
 }
+
+Button.propTypes = {
+    type: propTypes.oneOf(["button", "link"]),
+    onclick: propTypes.func,
+    target: propTypes.string,
+    className: propTypes.string,
+    isDisabled: propTypes.bool,
+    isLoading: propTypes.bool,
+    isSmall: propTypes.bool,
+    isLarge: propTypes.bool,
+    isBlock: propTypes.bool,
+    isBlock: propTypes.bool,
+    hasShadow: propTypes.bool,
+}
