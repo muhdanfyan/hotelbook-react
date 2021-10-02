@@ -4,11 +4,19 @@ import propTypes from 'prop-types'
 
 
 export default function Button(props) {
-    return (
-        <div>
-            
-        </div>
-    )
+    const className = [props.className]
+    if (props.isPrimary) className.push("btn-primary")
+    if (props.isLarge) className.push("btn-lg")
+    if (props.isSmall) className.push("btn-sm")
+    if (props.isBlock) className.push("btn-block")
+    if (props.hasShadow) className.push("btn-shadow")
+    if (props.isPrimary) className.push("btn-primary")
+
+    const onClick = () => {
+        if (props.onClick) props.onClick()
+    }
+
+    return <div></div>
 }
 
 Button.propTypes = {
@@ -20,7 +28,6 @@ Button.propTypes = {
     isLoading: propTypes.bool,
     isSmall: propTypes.bool,
     isLarge: propTypes.bool,
-    isBlock: propTypes.bool,
     isBlock: propTypes.bool,
     hasShadow: propTypes.bool,
 }
