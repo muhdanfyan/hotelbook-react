@@ -16,12 +16,61 @@ export default function Button(props) {
         if (props.onClick) props.onClick()
     }
 
-    return <div></div>
+    if (props.isDisabled || props.isLoading){
+        if (props.isDisabled) className.push("disabled")
+        return  (<span
+                className={className.join(" ")}
+                style={props.style}>
+                    {
+                        props.isLoading ? (<> 
+                        <span className="spinner-border spinner-border-sm mx-5"></span>
+                        <span className="sr-only">Loading...</span>
+                        </>) :(
+                            props.children
+                        )
+                    } 
+                </span>
+                )}
+
+    if (props.type === "link") {
+        if(props.isExternal){
+            return(
+                <a 
+                    href={props.href}
+                    className={className.join(" ")}
+                    style={props.style}
+                    target={props.target === "_blank" ? "_blank": undefined}
+                    rel={props.target === "_blank" ? "noopener noreferrer": undefined}
+                > 
+                {props.children} 
+                </a>
+            )
+        } else {
+            return(
+                <Link 
+                    to={props.href}
+                    className={className.join(" ")}
+                    style={props.style}
+                    onClick={onclick}
+                >
+                    {props.children} 
+                </Link>
+            )
+        }
+    }
+
+    return <button
+            className={className.join(" ")}
+            style={props.style}
+            onClick={onclick}>
+            {props.children} 
+            </button>
 }
 
 Button.propTypes = {
     type: propTypes.oneOf(["button", "link"]),
     onclick: propTypes.func,
+    href: propTypes.string,
     target: propTypes.string,
     className: propTypes.string,
     isDisabled: propTypes.bool,
